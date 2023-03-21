@@ -8,17 +8,20 @@ const bookingHistorySchema = new mongoose.Schema(
         },
         illness: { type: String },
         // TODO: Confirm date and time type
-        slot: {
-            date: { type: Date },
-            day: { type: String },
-            time: { type: String }
+        slotId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Slots',
         },
+        date: { type: String },
+        time: { type: String },
         appointmentStatus: { type: String },
         type: { type: String },
         doctorId: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
         },
+        // TODO: cancellation policy here
+        // status: { type: String }  // active - patient & doc upcoming slot OR cancelled OR completed
 	},
 	{ collection: 'bookingHistory' },
     { timestamps: true }

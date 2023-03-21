@@ -3,6 +3,8 @@ const bodyParser = require('body-parser')
 const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
 const docInfoRoute = require("./routes/doctorInfo");
+const slotsRoute = require("./routes/slots");
+const bookingRoute = require("./routes/booking");
 const app = express()
 const port = 4000
 
@@ -17,6 +19,8 @@ const routePrefix = "api";
 app.use(`/${routePrefix}`, authRoute);
 app.use(`/${routePrefix}/user`, userRoute);
 app.use(`/${routePrefix}/docinfo`, docInfoRoute);
+app.use(`/${routePrefix}/slot`, slotsRoute);
+app.use(`/${routePrefix}/booking`, bookingRoute);
 
 app.listen(port, async () => {
   try {

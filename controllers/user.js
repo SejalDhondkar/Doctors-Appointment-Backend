@@ -8,6 +8,7 @@ module.exports = {
         return res.status(200).json(user);
     },
 
+    // TODO: merge add user and edit user
     addUserInfo: async (req, res) => {
         const user = await currentUser(req,res);
         const doesInfoExist = await UserInfoModel.find({userId: user._id});

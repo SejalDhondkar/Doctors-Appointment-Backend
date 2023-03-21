@@ -1,9 +1,9 @@
 const UserModel = require('../models/user')
 const DoctorInfoModel = require('../models/doctorInfo')
+const SlotsModel = require('../models/slots')
 const { currentUser } = require('../helpers/user')
 
 module.exports = {
-
     addDoctorInfo: async (req, res) => {
         const user = await currentUser(req,res);
         const doctorInfo = await DoctorInfoModel.findOne({userId: user._id});
@@ -31,17 +31,6 @@ module.exports = {
         return res.status(200).json(doctorInfo);
     },
 
-    addClinicInfo: async (req, res) => {
-        const user = await currentUser(req,res);
-        const doctorInfo = await DoctorInfoModel.findOne({userId: user._id});
-
-        // TODO: Add a function which creates slots according to clinic info
-        let clinicInfo = await DoctorInfoModel.findByIdAndUpdate(doctorInfo._id, {...req.body, userId: user._id});
-        return res.status(200).json({
-            message: "Information added",
-            data: clinicInfo
-        });
-    },
 
     getAllDocs: async (req, res) => {
         const doctorInfo = await DoctorInfoModel.find().populate({
