@@ -8,7 +8,7 @@ router.post("/disable", slotBooking.disableSlot);
 
 // booking
 router.post("/cancel", bookingHistory.cancelBooking);
-router.post("/add", bookingHistory.addBookingHistory);
+router.post("/add", bookingHistory.addBooking);
 
 
 module.exports = router;
