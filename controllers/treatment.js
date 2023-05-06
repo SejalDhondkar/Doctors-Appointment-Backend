@@ -9,11 +9,15 @@ module.exports = {
     addTreatmentHistory: async (req, res) => {
         const user = await currentUser(req,res);
         let treatment = await TreatmentModel.create({...req.body, doctorId: user._id});
-        await HistoryModel.findByIdAndUpdate(req.historyId, { appointmentStatus: appointmentStatus.COMPLETED})
-        return res.status(200).json({
-            message: "Treatment added",
-            data: treatment
-        });
+        const updated = await HistoryModel.findOneAndUpdate({_id: req.body.historyId}, {$set:  { appointmentStatus: appointmentStatus.COMPLETED}})
+        return res.status(200).json(treatment);
+    },
+
+    getTreatment: async (req, res) => {
+        const treatment = await TreatmentModel.findOne({historyId: req.body.historyId}).populate('doctor').populate("patient").populate('doctorInfo').populate('appointmentInfo');
+        console.log(treatment);
+        if(!treatment) return res.status(400).json({message: "No records found"})
+        return res.status(200).json(treatment);
     },
 
     getPatientTreatment: async(req, res) => {
