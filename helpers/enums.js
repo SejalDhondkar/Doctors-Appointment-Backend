@@ -1,6 +1,5 @@
 const slotStatus = {
     OPEN : 'open',
-    BOOKED: 'booked',
     DISABLED: 'disabled'
 }
 

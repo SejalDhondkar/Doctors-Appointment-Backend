@@ -5,12 +5,13 @@ const userRoute = require("./routes/user");
 const docInfoRoute = require("./routes/doctorInfo");
 const slotsRoute = require("./routes/slots");
 const bookingRoute = require("./routes/booking");
+const treatmentRoute = require("./routes/treatment");
+const onlineMeetRoute = require("./routes/onlineMeet");
 const app = express()
 const port = 4000
 
 app.use(require("cors")());
 app.use(bodyParser.json());
-
 
 const dbConnect = require('./helpers/dbConnect')
 require("dotenv").config();
@@ -21,6 +22,8 @@ app.use(`/${routePrefix}/user`, userRoute);
 app.use(`/${routePrefix}/docinfo`, docInfoRoute);
 app.use(`/${routePrefix}/slot`, slotsRoute);
 app.use(`/${routePrefix}/booking`, bookingRoute);
+app.use(`/${routePrefix}/treatment`, treatmentRoute);
+app.use(`/${routePrefix}/meet`, onlineMeetRoute);
 
 app.listen(port, async () => {
   try {
