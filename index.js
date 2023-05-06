@@ -1,6 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const authRoute = require("./routes/auth");
+//const mentalRoute = require("./routes/mentalHealthInfo.js");
 const userRoute = require("./routes/user");
 const docInfoRoute = require("./routes/doctorInfo");
 const slotsRoute = require("./routes/slots");
@@ -24,6 +25,7 @@ app.use(`/${routePrefix}/slot`, slotsRoute);
 app.use(`/${routePrefix}/booking`, bookingRoute);
 app.use(`/${routePrefix}/treatment`, treatmentRoute);
 app.use(`/${routePrefix}/meet`, onlineMeetRoute);
+//app.use(`/${routePrefix}/mentalhealth`, mentalRoute);
 
 app.listen(port, async () => {
   try {
