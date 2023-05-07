@@ -15,7 +15,7 @@ module.exports.register = async (req,res)=>{
       delete req.body.password;
 
       const userRole = await RoleModel.findOne({name: req.body.role});      
-      console.log(userRole);
+      // console.log(userRole);
 
       await UserModel.create({...req.body, salt, hash, role: userRole._id});
       res.status(201).json({

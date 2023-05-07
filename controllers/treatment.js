@@ -15,7 +15,7 @@ module.exports = {
 
     getTreatment: async (req, res) => {
         const treatment = await TreatmentModel.findOne({historyId: req.body.historyId}).populate('doctor').populate("patient").populate('doctorInfo').populate('appointmentInfo');
-        console.log(treatment);
+        // console.log(treatment);
         if(!treatment) return res.status(400).json({message: "No records found"})
         return res.status(200).json(treatment);
     },

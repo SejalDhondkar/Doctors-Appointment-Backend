@@ -46,7 +46,7 @@ module.exports = {
         const bookId = req.body.bookingId;
         
         const booking = await HistoryModel.findByIdAndUpdate(bookId, {appointmentStatus: appointmentStatus.CANCELLED}, {"new": true});
-        console.log(booking);
+        // console.log(booking);
         if(!booking){
             return res.status(400).json({message: "Invalid request"});
         }

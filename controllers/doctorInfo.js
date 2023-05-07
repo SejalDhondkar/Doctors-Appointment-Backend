@@ -48,7 +48,7 @@ module.exports = {
             path: "userId",
             select: ['firstname','lastname', 'mobile']
         });
-        console.log(doctorInfo);
+        // console.log(doctorInfo);
         return res.status(200).json(doctorInfo);
     },
 
