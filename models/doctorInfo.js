@@ -12,6 +12,7 @@ const DoctorInfoSchema = new mongoose.Schema(
         experience: { type: String },
         specialization: { type: String },
         registrationNo: { type: String },
+        mentalProf: { type: Boolean},
         // ^ Doctor info
         // Clinic info
         clinicName: { type: String },

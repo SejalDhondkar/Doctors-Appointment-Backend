@@ -1,7 +1,9 @@
 const UserModel = require('../models/user')
 const DoctorInfoModel = require('../models/doctorInfo')
 const SlotsModel = require('../models/slots')
+const HistoryModel = require('../models/bookingHistory')
 const { currentUser } = require('../helpers/user')
+const { appointmentStatus } = require('../helpers/enums')
 
 module.exports = {
     addDoctorInfo: async (req, res) => {
@@ -39,5 +41,29 @@ module.exports = {
         });
 
         return res.status(200).json(doctorInfo);
-    }
+    },
+
+    getAllMentalProfDocs: async (req, res) => {
+        const doctorInfo = await DoctorInfoModel.find({mentalProf: true}).populate({
+            path: "userId",
+            select: ['firstname','lastname', 'mobile']
+        });
+        console.log(doctorInfo);
+        return res.status(200).json(doctorInfo);
+    },
+
+    getDocStats: async (req, res) => {
+        const user = await currentUser(req,res);
+        const totalCount = await HistoryModel.find({doctorId: user._id}).count();
+        const bookedCount = await HistoryModel.find({doctorId: user._id, appointmentStatus: appointmentStatus.BOOKED}).count();
+        const completedCount = await HistoryModel.find({doctorId: user._id, appointmentStatus: appointmentStatus.COMPLETED}).count();
+        const cancelledCount = await HistoryModel.find({doctorId: user._id, appointmentStatus: appointmentStatus.CANCELLED}).count();
+        const data = {
+            totalCount,
+            bookedCount,
+            completedCount,
+            cancelledCount
+        }
+        return res.status(200).json(data);
+    },
 }
